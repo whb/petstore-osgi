@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       http://www.springframework.org/schema/beans/spring-beans.xsd                      
+       http://www.springframework.org/schema/osgi  
+       http://www.springframework.org/schema/osgi/spring-osgi.xsd
+	   http://www.springframework.org/schema/tx 
+	   http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	   http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!-- dozer -->
+	<bean id="dozerBeanMapper"
+		class="net.sf.dozer.util.mapping.DozerBeanMapper">
+		<property name="mappingFiles">
+			<list>
+				<value>dozerBeanMapping.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- DO VO 转换器 -->
+	<bean id="dozerConvertUtil"
+		class="com.sitechasia.webx2.petstore.utils.DozerConvertUtilImle">
+		<property name="dozerBeanMapper">
+			<ref bean="dozerBeanMapper" />
+		</property>
+	</bean>
+
+	<bean id="catalogService"
+		class="com.sitechasia.webx2.petstore.service.impl.CatalogServiceImpl">
+		<property name="catalogDao">
+			<ref bean="catalogDao" />
+		</property>
+		<property name="productDao">
+			<ref bean="productDao" />
+		</property>
+		<property name="itemDao">
+			<ref bean="itemDao" />
+		</property>
+		<property name="dozerConvertUtil">
+			<ref bean="dozerConvertUtil" />
+		</property>
+	</bean>
+
+	<bean id="customerService"
+		class="com.sitechasia.webx2.petstore.service.impl.CustomerServiceImpl">
+		<property name="customerDao">
+			<ref bean="customerDao" />
+		</property>
+		<property name="dozerConvertUtil">
+			<ref bean="dozerConvertUtil" />
+		</property>
+	</bean>
+
+	<bean id="orderService"
+		class="com.sitechasia.webx2.petstore.service.impl.OrderServiceImpl">
+		<property name="orderDao">
+			<ref bean="orderDao" />
+		</property>
+		<property name="dozerConvertUtil">
+			<ref bean="dozerConvertUtil" />
+		</property>
+	</bean>
+
+	<osgi:reference id="catalogDao"
+		interface="com.sitechasia.webx2.petstore.dao.CatalogDao" />
+	<osgi:reference id="customerDao"
+		interface="com.sitechasia.webx2.petstore.dao.CustomerDao" />
+	<osgi:reference id="orderDao"
+		interface="com.sitechasia.webx2.petstore.dao.OrderDao" />
+	<osgi:reference id="sequenceDao"
+		interface="com.sitechasia.webx2.petstore.dao.SequenceDao" />
+	<osgi:reference id="itemDao"
+		interface="com.sitechasia.webx2.petstore.dao.ItemDao" />
+	<osgi:reference id="productDao"
+		interface="com.sitechasia.webx2.petstore.dao.ProductDao" />
+
+	<osgi:service ref="catalogService"
+		interface="mypetstore.service.CatalogService" />
+	<osgi:service ref="customerService"
+		interface="mypetstore.service.CustomerService" />
+	<osgi:service ref="orderService"
+		interface="mypetstore.service.OrderService" />
+</beans>

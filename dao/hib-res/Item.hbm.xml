@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.sitechasia.webx2.petstore.model">
+	<class name="Item" table="ITEM">
+		<id name="itemId" column="ITEMID" unsaved-value="null">
+			<generator class="assigned" />
+		</id>
+
+		<property name="listPrice" column="LISTPRICE" />
+
+		<property name="unitCost" column="UNITCOST" />
+
+		<property name="supplierId" column="SUPPLIER" />
+
+		<property name="status" column="STATUS" />
+
+		<property name="attribute1" column="ATTR1" />
+
+		<property name="attribute2" column="ATTR2" />
+
+		<property name="attribute3" column="ATTR3" />
+
+		<property name="attribute4" column="ATTR4" />
+
+		<property name="attribute5" column="ATTR5" />
+
+		<many-to-one name="product" class="Product" column="PRODUCTID"
+			cascade="none" lazy="false" />
+
+		<one-to-one name="inventory"
+			class="com.sitechasia.webx2.petstore.model.Inventory"
+			cascade="all" />
+	</class>
+</hibernate-mapping>

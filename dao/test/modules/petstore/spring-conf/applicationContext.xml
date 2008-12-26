@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+
+	<!-- 读取数据库配置文件 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"
+			value="classpath:config/jdbc.properties" />
+	</bean>
+
+	<!-- 配置数据库监控定义 -->
+	<bean id="dataSource"
+		class="com.sitechasia.webx.core.utils.datasource.DevelopmentDataSource">
+		<property name="wrappedDataSource">
+			<ref bean="dataSources" />
+		</property>
+	</bean>
+
+	<!-- 数据源定义 -->
+	<bean id="dataSources"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${driver}" />
+		<property name="jdbcUrl" value="${url}" />
+		<property name="user" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="50" />
+		<property name="maxIdleTime" value="1800" />
+		<property name="maxStatements" value="50" />
+	</bean>
+
+	<!-- Jdbc Template 定义 -->
+	<!-- bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg>
+		<ref bean="dataSource" />
+		</constructor-arg>
+		</bean-->
+
+	<!-- Hibernate SessionFactory 定义 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="mappingResources">
+			<list>
+				<value>
+					modules/petstore/hibernate-conf/Account.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/Category.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/Item.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/LineItem.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/Order.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/Product.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/BannerData.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/Profile.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/Signon.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/Inventory.hbm.xml
+				</value>
+				<value>
+					modules/petstore/hibernate-conf/Sequence.hbm.xml
+				</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.HSQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.max_fetch_depth">2</prop>
+				<prop key="hibernate.cache.use_second_level_cache">
+					false
+				</prop>
+				<!--prop key="hibernate.cache.use_query_cache">true</prop>
+					<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.EhCacheProvider
+					</prop-->
+				<!--prop key="hibernate.hbm2ddl.auto">create-drop</prop-->
+			</props>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<!-- Catalog DAO Definition: Hibernate implementation -->
+	<bean id="catalogDao"
+		class="mypetstore.dao.hibernate.CatalogDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!--  Customer DAO object: Hibernate implementation -->
+	<bean id="customerDao"
+		class="mypetstore.dao.hibernate.CustomerDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!--  Order DAO object: Hibernate implementation -->
+	<bean id="orderDao"
+		class="mypetstore.dao.hibernate.OrderDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="sequenceDao">
+			<ref bean="sequenceDao" />
+		</property>
+	</bean>
+
+	<!--  Sequence DAO object: Jdbc implementation -->
+	<bean id="sequenceDao"
+		class="mypetstore.dao.jdbc.SequenceDaoJdbcImpl">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<!-- 注意 这块比较特殊 一定要配置 -->
+		<property name="pageSqlProvider">
+			<ref bean="pageSqlProvider" />
+		</property>
+	</bean>
+	<!-- 根据不同的数据库对应SQL分页类 -->
+	<bean id="pageSqlProvider"
+		class="com.sitechasia.webx.core.dao.jdbc.mysql.MySqlPageSqlProvider">
+	</bean>
+
+
+	<!--  Item DAO object: Hibernate implementation -->
+	<bean id="itemDao"
+		class="mypetstore.dao.hibernate.ItemDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!--  Product DAO object: Hibernate implementation -->
+	<bean id="productDao"
+		class="mypetstore.dao.hibernate.ProductDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="commonHibernateDao"
+		class="com.sitechasia.webx.core.dao.hibernate3.CommonHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="commonJdbcDao"
+		class="com.sitechasia.webx.core.dao.jdbc.CommonJdbcDao">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<!-- Hibernate Transaction Manager Definition -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- 老的事务配置方式
+		Catalog Service Definition  
+		<bean id="catalogServiceTarget"
+		class="mypetstore.service.impl.CatalogServiceImpl">
+		<property name="catalogDao">
+		<ref local="catalogDao" />
+		</property>
+		<property name="productDao">
+		<ref local="productDao" />
+		</property>
+		<property name="itemDao">
+		<ref local="itemDao" />
+		</property>
+		</bean>
+		
+		Transactional proxy for the Catalog Service  
+		<bean id="catalogService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+		<ref local="transactionManager" />
+		</property>
+		<property name="target">
+		<ref local="catalogServiceTarget" />
+		</property>
+		<property name="transactionAttributes">
+		<props>
+		<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="search*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="save*">PROPAGATION_REQUIRED</prop>
+		<prop key="doSave">PROPAGATION_REQUIRED</prop>
+		</props>
+		</property>
+		</bean>
+		
+		Customer Service Definition  
+		<bean id="customerServiceTarget"
+		class="mypetstore.service.impl.CustomerServiceImpl">
+		<property name="customerDao">
+		<ref local="customerDao" />
+		</property>
+		</bean>
+		
+		Transactional proxy for the Customer Service  
+		<bean id="customerService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+		<ref local="transactionManager" />
+		</property>
+		<property name="target">
+		<ref local="customerServiceTarget" />
+		</property>
+		<property name="transactionAttributes">
+		<props>
+		<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="save*">PROPAGATION_REQUIRED</prop>
+		<prop key="update*">PROPAGATION_REQUIRED</prop>
+		<prop key="delete*">PROPAGATION_REQUIRED</prop>
+		<prop key="signon">PROPAGATION_REQUIRED,readOnly</prop>
+		</props>
+		</property>
+		</bean>
+		
+		Order Service Definition  
+		<bean id="orderServiceTarget"
+		class="mypetstore.service.impl.OrderServiceImpl">
+		<property name="orderDao">
+		<ref local="orderDao" />
+		</property>
+		</bean>
+		
+		Transactional proxy for the Order Service  
+		<bean id="orderService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+		<ref local="transactionManager" />
+		</property>
+		<property name="target">
+		<ref local="orderServiceTarget" />
+		</property>
+		<property name="transactionAttributes">
+		<props>
+		<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+		<prop key="save*">PROPAGATION_REQUIRED</prop>
+		</props>
+		</property>
+		</bean>
+		
+	-->
+	<bean id="catalogService"
+		class="mypetstore.service.impl.CatalogServiceImpl">
+		<property name="catalogDao">
+			<ref local="catalogDao" />
+		</property>
+		<property name="productDao">
+			<ref local="productDao" />
+		</property>
+		<property name="itemDao">
+			<ref local="itemDao" />
+		</property>
+	</bean>
+
+	<bean id="customerService"
+		class="mypetstore.service.impl.CustomerServiceImpl">
+		<property name="customerDao">
+			<ref local="customerDao" />
+		</property>
+	</bean>
+
+	<bean id="orderService"
+		class="mypetstore.service.impl.OrderServiceImpl">
+		<property name="orderDao">
+			<ref local="orderDao" />
+		</property>
+	</bean>
+
+	<!-- 事务配置 -->
+	<tx:advice id="catalogServiceAdvice">
+		<tx:attributes>
+			<tx:method name="get*"  read-only="true" />
+			<tx:method name="search*"  read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<tx:advice id="customerServiceAdvice">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="signon" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<tx:advice id="orderServiceAdvice">
+		<tx:attributes>
+			<tx:method name="get*"  read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- Cache相关的配置文件 -->
+	<bean id="webxCacheProvider"
+		class="com.sitechasia.webx.core.cache.ehcache.EhCacheProvider"
+		init-method="start" destroy-method="close" />
+	<!-- AOP配置 -->
+	<bean id="cacheAdvice"
+		class="com.sitechasia.webx.core.cache.annotation.CacheAdvisor" />
+	<aop:config proxy-target-class="true">
+		<!-- 事务相关 -->
+		<aop:pointcut id="catalogServiceOperation"
+			expression="execution(* mypetstore.service.CatalogService.*(..))" />
+		<aop:pointcut id="customerServiceOperation"
+			expression="execution(* mypetstore.service.CustomerService.*(..))" />
+		<aop:pointcut id="orderServiceOperation"
+			expression="execution(* mypetstore.service.OrderService.*(..))" />
+		<aop:advisor pointcut-ref="catalogServiceOperation"
+			advice-ref="catalogServiceAdvice" />
+		<aop:advisor pointcut-ref="customerServiceOperation"
+			advice-ref="customerServiceAdvice" />
+		<!-- Cache相关 -->
+		<aop:advisor pointcut-ref="orderServiceOperation"
+			advice-ref="orderServiceAdvice" />
+		<aop:aspect id="cacheableAdvice" ref="cacheAdvice" order="0">
+			<aop:pointcut id="cachePointCut"
+				expression="execution(* mypetstore..*.*Service*.*(..)) and @annotation(com.sitechasia.webx.core.cache.annotation.WebXCache)" />
+			<aop:around method="doCache" pointcut-ref="cachePointCut" />
+		</aop:aspect>
+	</aop:config>
+
+	<!-- dozer -->
+	<bean id="dozerBeanMapper"
+		class="net.sf.dozer.util.mapping.DozerBeanMapper">
+		<property name="mappingFiles">
+			<list>
+				<value>modules/petstore/spring-conf/dozerBeanMapping.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- DO VO 转换器 -->
+	<bean id="dozerConvertUtil"
+		class="mypetstore.utils.DozerConvertUtilImle">
+		<property name="dozerBeanMapper">
+			<ref local="dozerBeanMapper" />
+		</property>
+	</bean>
+	
+</beans>

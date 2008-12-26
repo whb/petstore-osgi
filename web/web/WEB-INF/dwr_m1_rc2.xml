@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://getahead.org/dwr/dwr20.dtd">
+
+<dwr>
+	<allow>
+		<create creator="new" javascript="Demo">
+			<param name="class"
+				value="org.getahead.dwrdemo.simpletext.Demo" />
+		</create>
+
+		<create creator="new" javascript="Service"
+			scope="application">
+			<param name="class"
+				value="com.dwrdemo.reverseajax.message.Service" />
+		</create>
+		<convert converter="bean"
+			match="com.dwrdemo.reverseajax.message.Data" />
+
+		<create creator="new" javascript="JavaChat">
+			<param name="class"
+				value="com.dwrdemo.reverseajax.chat.JavaChat" />
+		</create>
+		<convert converter="bean"
+			match="com.dwrdemo.reverseajax.chat.Message" />
+
+
+
+		<create creator="spring" javascript="ajaxCatalogService">
+			<param name="beanName" value="catalogService" />
+		</create>
+		<convert converter="bean" match="mypetstore.web.vo.*" />
+
+	</allow>
+</dwr>

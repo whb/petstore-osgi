@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName">
+	<!-- 在这个文件中设置Struts的Action -->
+	<!-- catalog -->
+	<bean name="/shop/index" class="mypetstore.web.action.CatalogAction" />
+	<bean name="/shop/searchProducts" class="mypetstore.web.action.CatalogAction" />
+	<bean name="/shop/viewCategory" class="mypetstore.web.action.CatalogAction" />
+	<bean name="/shop/viewProduct" class="mypetstore.web.action.CatalogAction" />
+	<bean name="/shop/viewItem" class="mypetstore.web.action.CatalogAction" />
+	<!-- base CRUD -->
+	<bean name="/shop/categoryOperation" class="mypetstore.web.action.CategoryCRUDAction" />
+	<!-- cart -->
+	<bean name="/shop/cart" class="mypetstore.web.action.CartAction" />
+	<!-- order -->
+	<bean name="/shop/order" class="mypetstore.web.action.OrderAction" />
+	<bean name="/shop/newOrder" class="mypetstore.web.action.NewOrderAction" />
+	<!-- account -->
+	<bean name="/shop/newAccount" class="mypetstore.web.action.NewAccountAction" />
+	<bean name="/shop/editAccount" class="mypetstore.web.action.EditAccountAction" />
+	<bean name="/shop/signon" class="mypetstore.web.action.SignonAction" />
+	<bean name="/shop/signoff" class="mypetstore.web.action.SignoffAction" />
+	
+</beans>

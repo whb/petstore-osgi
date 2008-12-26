@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.sitechasia.webx2.petstore.model">
+	<class name="LineItem" table="LINEITEM">
+		<composite-id  unsaved-value="any">
+        	<key-property name="orderId" column="ORDERID"/>
+        	<key-property name="lineNumber" column="LINENUM"/>
+		</composite-id>
+
+		<property name="itemId"
+			      column="ITEMID"
+			      not-null="true"/>
+
+		<property name="quantity"
+			      column="QUANTITY"
+			      not-null="true"/>
+
+		<property name="unitPrice"
+			      column="UNITPRICE"
+			      not-null="true"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="mypetstore.model">
+	<class name="Sequence" table="SEQUENCE">
+		<id name="id" column="id" unsaved-value="null">
+			<generator class="assigned" />
+		</id>
+		<property name="seqnum" column="SEQNUM" not-null="true" />
+	</class>
+</hibernate-mapping>

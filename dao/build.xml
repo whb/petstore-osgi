@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="petstore_dao" default="build.jar" basedir=".">
+	<property name="bundleId" value="petstore_dao"/>
+	<property name="bundleVersion" value="1.0.0"/>
+
+	<target name="build.jar" description="Build jar.">
+		
+		<jar destfile="target/${bundleId}_${bundleVersion}.jar" filesetmanifest="merge">
+			<fileset dir="bin" />
+		</jar>
+	</target>
+	
+
+</project>

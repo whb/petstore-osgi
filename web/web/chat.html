@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Java Chat</title>
+<script type='text/javascript' src='dwr/engine.js'> </script>
+<script type='text/javascript' src='dwr/interface/JavaChat.js'> </script>
+<script type='text/javascript' src='dwr/util.js'> </script>
+<script type="text/javascript">
+	function setRoom() {
+      JavaChat.setRoom(dwr.util.getValue("room"));
+    }
+    
+    function sendMessage() {
+      JavaChat.addMessage(dwr.util.getValue("text"));
+    }
+</script>
+</head>
+
+<body onload="dwr.engine.setActiveReverseAjax(true);">
+<h1>Java Chat</h1>
+
+<p>This is a very simple chat demo that uses reverse ajax to collect
+messages and server-side browser manipulation to update the pages with
+the results.</p>
+
+<p>Your Room: <input id="room"
+	onkeypress="dwr.util.onReturn(event, setRoom)" /> <input type="button"
+	value="Set" onclick="setRoom()" /></p>
+<br />
+
+<p>Your Message: <input id="text"
+	onkeypress="dwr.util.onReturn(event, sendMessage)" /> <input
+	type="button" value="Send" onclick="sendMessage()" /></p>
+<hr />
+
+<ul id="chatlog">
+</ul>
+
+</body>
+</html>

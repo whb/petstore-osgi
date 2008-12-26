@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mappings PUBLIC "-//DOZER//DTD MAPPINGS//EN"
+   "http://dozer.sourceforge.net/dtd/dozerbeanmapping.dtd">
+<mappings>
+	<configuration>
+		<stop-on-errors>true</stop-on-errors>
+		<date-format>MM/dd/yyyy HH:mm</date-format>
+		<wildcard>true</wildcard>
+	</configuration>
+	<mapping>
+		<class-a>com.sitechasia.webx2.petstore.vo.OrderVo</class-a>
+		<class-b>com.sitechasia.webx2.petstore.model.Order</class-b>
+		<field>
+			<a>lineItems</a>
+			<b>lineItems</b>
+			<b-hint>com.sitechasia.webx2.petstore.model.LineItem</b-hint> 
+		</field>
+	</mapping>
+</mappings>

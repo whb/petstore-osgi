@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Map Plug-in
+Bundle-SymbolicName: petstore_datasource;singleton:=true
+Bundle-Version: 1.0.0
+Import-Package: com.mchange.v2.c3p0,
+ javax.transaction,
+ org.apache.commons.logging;version="1.0.4",
+ org.hibernate,
+ org.hibernate.cfg,
+ org.hibernate.dialect,
+ org.hibernate.dialect.function,
+ org.hibernate.event,
+ org.hibernate.mapping,
+ org.hibernate.proxy,
+ org.hibernate.tool.hbm2ddl,
+ org.springframework.beans.factory,
+ org.springframework.core.io;version="2.5.1",
+ org.springframework.dao.support,
+ org.springframework.orm.hibernate3;version="2.5.1"
+Export-Package: com.sitechasia.webx.orm
+

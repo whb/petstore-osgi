@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="mypetstore.model">
+	<class name="Order" table="ORDERS">
+		<id name="orderId" column="ORDERID" unsaved-value="null">
+			<generator class="assigned" />
+		</id>
+
+		<property name="username" column="USERID" not-null="true" />
+
+		<property name="orderDate" column="ORDERDATE" type="date"
+			not-null="true" />
+
+		<property name="shipAddress1" column="SHIPADDR1"
+			not-null="true" />
+
+		<property name="shipAddress2" column="SHIPADDR2" />
+
+		<property name="shipCity" column="SHIPCITY" not-null="true" />
+
+		<property name="shipState" column="SHIPSTATE" not-null="true" />
+
+		<property name="shipZip" column="SHIPZIP" not-null="true" />
+
+		<property name="shipCountry" column="SHIPCOUNTRY"
+			not-null="true" />
+
+		<property name="billAddress1" column="BILLADDR1"
+			not-null="true" />
+
+		<property name="billAddress2" column="BILLADDR2" />
+
+		<property name="billCity" column="BILLCITY" not-null="true" />
+
+		<property name="billState" column="BILLSTATE" not-null="true" />
+
+		<property name="billZip" column="BILLZIP" not-null="true" />
+
+		<property name="billCountry" column="BILLCOUNTRY"
+			not-null="true" />
+
+		<property name="courier" column="COURIER" not-null="true" />
+
+		<property name="totalPrice" column="TOTALPRICE" not-null="true" />
+
+		<property name="billToFirstName" column="BILLTOFIRSTNAME"
+			not-null="true" />
+
+		<property name="billToLastName" column="BILLTOLASTNAME"
+			not-null="true" />
+
+		<property name="shipToFirstName" column="SHIPTOFIRSTNAME"
+			not-null="true" />
+
+		<property name="shipToLastName" column="SHIPTOLASTNAME"
+			not-null="true" />
+
+		<property name="creditCard" column="CREDITCARD" not-null="true" />
+
+		<property name="expiryDate" column="EXPRDATE" not-null="true" />
+
+		<property name="locale" column="LOCALE" not-null="true" />
+
+		<property name="cardType" column="CARDTYPE" not-null="true" />
+
+		<set name="lineItems" cascade="all">
+			<key column="ORDERID" />
+			<one-to-many class="LineItem" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+
+	<!-- 读取数据库配置文件 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"
+			value="classpath:resource/config/jdbc.properties" />
+	</bean>
+
+	<!-- 配置数据库监控定义 -->
+	<bean id="dataSource"
+		class="com.sitechasia.webx.core.utils.datasource.DevelopmentDataSource">
+		<property name="wrappedDataSource">
+			<ref bean="dataSources" />
+		</property>
+	</bean>
+
+	<!-- 数据源定义 -->
+	<bean id="dataSources"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${driver}" />
+		<property name="jdbcUrl" value="${url}" />
+		<property name="user" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="50" />
+		<property name="maxIdleTime" value="1800" />
+		<property name="maxStatements" value="50" />
+	</bean>
+
+	<!-- Jdbc Template 定义 -->
+	<!-- bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg>
+		<ref bean="dataSource" />
+		</constructor-arg>
+		</bean-->
+
+	<!-- Hibernate SessionFactory 定义 -->
+	<bean id="sessionFactory"
+		class="com.sitechasia.webx.orm.LocalSessionFactoryBean">
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.HSQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.max_fetch_depth">2</prop>
+				<prop key="hibernate.cache.use_second_level_cache">
+					false
+				</prop>
+				<!--prop key="hibernate.cache.use_query_cache">true</prop>
+					<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.EhCacheProvider
+					</prop-->
+				<!--prop key="hibernate.hbm2ddl.auto">create-drop</prop-->
+			</props>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<!-- Catalog DAO Definition: Hibernate implementation -->
+	<bean id="catalogDao"
+		class="com.sitechasia.webx2.petstore.dao.impl.CatalogDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!--  Customer DAO object: Hibernate implementation -->
+	<bean id="customerDao"
+		class="com.sitechasia.webx2.petstore.dao.impl.CustomerDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!--  Order DAO object: Hibernate implementation -->
+	<bean id="orderDao"
+		class="com.sitechasia.webx2.petstore.dao.impl.OrderDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="sequenceDao">
+			<ref bean="sequenceDao" />
+		</property>
+	</bean>
+
+	<!--  Sequence DAO object: Jdbc implementation -->
+	<bean id="sequenceDao"
+		class="com.sitechasia.webx2.petstore.dao.impl.SequenceDaoJdbcImpl">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<!-- 注意 这块比较特殊 一定要配置 -->
+		<property name="pageSqlProvider">
+			<ref bean="pageSqlProvider" />
+		</property>
+	</bean>
+	<!-- 根据不同的数据库对应SQL分页类 -->
+	<bean id="pageSqlProvider"
+		class="com.sitechasia.webx.core.dao.jdbc.mysql.MySqlPageSqlProvider">
+	</bean>
+
+
+	<!--  Item DAO object: Hibernate implementation -->
+	<bean id="itemDao"
+		class="com.sitechasia.webx2.petstore.dao.impl.ItemDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!--  Product DAO object: Hibernate implementation -->
+	<bean id="productDao"
+		class="com.sitechasia.webx2.petstore.dao.impl.ProductDaoHibernateImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="commonHibernateDao"
+		class="com.sitechasia.webx.core.dao.hibernate3.CommonHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="commonJdbcDao"
+		class="com.sitechasia.webx.core.dao.jdbc.CommonJdbcDao">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+	
+</beans>

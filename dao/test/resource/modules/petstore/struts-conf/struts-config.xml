@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+    "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="accountForm"
+			type="mypetstore.web.form.AccountForm" />
+		<form-bean name="orderForm"
+			type="mypetstore.web.form.OrderForm" />
+		<form-bean name="cartForm" type="mypetstore.web.form.CartForm" />
+		<form-bean name="catalogForm"
+			type="mypetstore.web.form.CatalogForm" />
+	</form-beans>
+
+	<global-exceptions>
+		<exception key="errors.general" type="java.lang.Exception"
+			path="/common/Error.jsp" />
+	</global-exceptions>
+
+	<global-forwards>
+		<forward name="failure" path="/common/Error.jsp" />
+		<forward name="error" path="/common/Error.jsp" />
+	</global-forwards>
+
+	<!-- 留意，这个配置文件中只有mapping而没有定义action，真正的action对象将由Spring进行维护 -->
+	<action-mappings>
+		<!-- catalog -->
+		<action path="/shop/index" scope="request" name="catalogForm"
+			parameter="method" validate="false">
+			<forward name="success" path="/catalog/Main.jsp" />
+		</action>
+
+		<action path="/shop/searchProducts" scope="session"
+			name="catalogForm" parameter="method" validate="false">
+			<forward name="success" path="/catalog/SearchProducts.jsp" />
+		</action>
+
+		<action path="/shop/viewCategory" name="catalogForm"
+			scope="session" validate="false" parameter="method">
+			<forward name="success" path="/catalog/Category.jsp" />
+		</action>
+
+		<action path="/shop/viewProduct" name="catalogForm"
+			scope="session" validate="false" parameter="method">
+			<forward name="success" path="/catalog/Product.jsp" />
+		</action>
+
+		<action path="/shop/viewItem" name="catalogForm" scope="session"
+			validate="false" parameter="method" input="/catalog/Product.jsp">
+			<forward name="success" path="/catalog/Item.jsp" />
+		</action>
+
+		<!-- base CRUD -->
+		<action path="/shop/categoryOperation" scope="request"
+			validate="false" parameter="method">
+			<forward name="list"
+				path="/shop/categoryOperation.shtml?method=list" />
+			<forward name="save" path="/catalog/categoryList.jsp" />
+			<forward name="update" path="/catalog/categoryEdit.jsp" />
+		</action>
+
+		<!-- cart -->
+		<action path="/shop/cart" name="cartForm" scope="session"
+			validate="false" parameter="method">
+			<forward name="cartPage" path="/cart/Cart.jsp" />
+		</action>
+		<action path="/shop/viewCart" forward="/cart/Cart.jsp" />
+
+		<!-- order -->
+		<action path="/shop/order" name="orderForm" scope="session"
+			validate="false" parameter="method">
+			<forward name="newOrderForm" path="/order/NewOrderForm.jsp" />
+			<forward name="listOrders" path="/order/ListOrders.jsp" />
+			<forward name="switchOrderPage"
+				path="/order/ListOrders.jsp" />
+			<forward name="viewOrder" path="/order/ViewOrder.jsp" />
+			<forward name="signon" path="/account/SignonForm.jsp" />
+		</action>
+
+		<action path="/shop/newOrder" name="orderForm" scope="session"
+			validate="true" input="/order/NewOrderForm.jsp">
+			<forward name="confirm" path="/order/ConfirmOrder.jsp" />
+			<forward name="shipping" path="/order/ShippingForm.jsp" />
+			<forward name="success" path="/order/ViewOrder.jsp" />
+		</action>
+
+		<!--<action path="/shop/switchMyListPage"
+			type="mypetstore.web.action.SwitchMyListPageAction"
+			name="accountForm" scope="session" validate="false">
+			<forward name="success" path="/cart/Cart.jsp" />
+			</action>
+		-->
+		<action path="/shop/signonForm"
+			forward="/account/SignonInfo.jsp" />
+		<action path="/shop/newAccountForm"
+			forward="/account/NewAccountForm.jsp" />
+		<action path="/shop/editAccountForm"
+			forward="/account/EditAccountForm.jsp" />
+		<action path="/shop/newAccount" name="accountForm"
+			scope="session" validate="true"
+			input="/account/NewAccountForm.jsp">
+			<forward name="success"
+				path="/shop/index.shtml?method=index" />
+		</action>
+		<action path="/shop/editAccount" name="accountForm"
+			scope="session" validate="true"
+			input="/account/EditAccountForm.jsp">
+			<forward name="success"
+				path="/shop/index.shtml?method=index" />
+		</action>
+		<action path="/shop/signon" name="accountForm" scope="session"
+			validate="false">
+			<forward name="success"
+				path="/shop/index.shtml?method=index" />
+		</action>
+		<action path="/shop/signoff" name="accountForm" scope="session"
+			validate="false">
+			<forward name="success"
+				path="/shop/index.shtml?method=index" />
+		</action>
+		<!-- 	
+			<action path="/shop/viewProduct"
+			type="mypetstore.web.action.CatalogAction" name="catalogForm"
+			scope="session" validate="false" parameter="method">
+			<forward name="success" path="/catalog/Product.jsp" />
+			</action>
+			
+			<action path="/shop/viewItem"
+			type="mypetstore.web.action.CatalogAction" name="catalogForm"
+			scope="session" validate="false" parameter="method"
+			input="/catalog/Product.jsp">
+			<forward name="success" path="/catalog/Item.jsp" />
+			</action>
+			
+			add BaseCURD Operation 
+			<action path="/shop/categoryOperation"
+			type="mypetstore.web.action.CategoryCRUDAction" scope="request"
+			validate="false" parameter="method">
+			<forward name="list"
+			path="/shop/categoryOperation.shtml?method=list" />
+			<forward name="save" path="/catalog/categoryList.jsp" />
+			<forward name="update" path="/catalog/categoryEdit.jsp" />
+			</action>
+			
+			CART ACTIONS 
+			
+			<action path="/shop/cart"
+			type="mypetstore.web.action.CartAction" name="cartForm"
+			scope="session" validate="false" parameter="method">
+			<forward name="cartPage" path="/cart/Cart.jsp" />
+			</action>
+			<action path="/shop/viewCart" forward="/cart/Cart.jsp" />
+			
+			ORDER ACTIONS 
+			<action path="/shop/order"
+			type="mypetstore.web.action.OrderAction" name="orderForm"
+			scope="session" validate="false" parameter="method">
+			<forward name="newOrderForm" path="/order/NewOrderForm.jsp" />
+			<forward name="listOrders" path="/order/ListOrders.jsp" />
+			<forward name="switchOrderPage"
+			path="/order/ListOrders.jsp" />
+			<forward name="viewOrder" path="/order/ViewOrder.jsp" />
+			<forward name="signon" path="/account/SignonForm.jsp" />
+			</action>
+			
+			<action path="/shop/newOrder"
+			type="mypetstore.web.action.NewOrderAction" name="orderForm"
+			scope="session" validate="true" input="/order/NewOrderForm.jsp">
+			<forward name="confirm" path="/order/ConfirmOrder.jsp" />
+			<forward name="shipping" path="/order/ShippingForm.jsp" />
+			<forward name="success" path="/order/ViewOrder.jsp" />
+			</action>
+			
+			
+			ACCOUNT ACTIONS 
+			<action path="/shop/switchMyListPage"
+			type="mypetstore.web.action.SwitchMyListPageAction"
+			name="accountForm" scope="session" validate="false">
+			<forward name="success" path="/cart/Cart.jsp" />
+			</action>
+			<action path="/shop/signonForm"
+			forward="/account/SignonInfo.jsp" />
+			<action path="/shop/newAccountForm"
+			forward="/account/NewAccountForm.jsp" />
+			<action path="/shop/newAccount"
+			type="mypetstore.web.action.NewAccountAction" name="accountForm"
+			scope="session" validate="true"
+			input="/account/NewAccountForm.jsp">
+			<forward name="success"
+			path="/shop/index.shtml?method=index" />
+			</action>
+			<action path="/shop/editAccountForm"
+			forward="/account/EditAccountForm.jsp" />
+			<action path="/shop/editAccount"
+			type="mypetstore.web.action.EditAccountAction" name="accountForm"
+			scope="session" validate="true"
+			input="/account/EditAccountForm.jsp">
+			<forward name="success"
+			path="/shop/index.shtml?method=index" />
+			</action>
+			<action path="/shop/signon"
+			type="mypetstore.web.action.SignonAction" name="accountForm"
+			scope="session" validate="false">
+			<forward name="success"
+			path="/shop/index.shtml?method=index" />
+			</action>
+			<action path="/shop/signoff"
+			type="mypetstore.web.action.SignoffAction" name="accountForm"
+			scope="session" validate="false">
+			<forward name="success"
+			path="/shop/index.shtml?method=index" />
+			</action>
+			
+		-->
+	</action-mappings>
+
+	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+
+	<message-resources parameter="messages" />
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+	<plug-in
+		className="org.springframework.web.struts.ContextLoaderPlugIn">
+		<set-property property="contextConfigLocation"
+			value="classpath*:modules/**/struts-spring-conf/*.xml" />
+	</plug-in>
+
+</struts-config>

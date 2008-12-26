@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="mypetstore.model">
+	<class name="Profile" table="PROFILE">
+		<id name="username" column="USERID">
+			<generator class="foreign">
+				<param name="property">account</param>
+			</generator>
+		</id>
+
+		<property name="favoriteCategoryId" column="FAVCATEGORY" />
+
+		<property name="languagePreference" column="LANGPREF"
+			not-null="true" />
+
+		<property name="listOption" column="MYLISTOPT" />
+
+		<property name="bannerOption" column="BANNEROPT" />
+
+		<many-to-one name="bannerData" class="BannerData"
+			column="FAVCATEGORY" insert="false" update="false" lazy="false" />
+
+		<one-to-one name="account"
+			class="mypetstore.model.Account" constrained="true" />
+	</class>
+</hibernate-mapping>

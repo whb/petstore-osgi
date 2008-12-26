@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       http://www.springframework.org/schema/beans/spring-beans.xsd                      
+       http://www.springframework.org/schema/osgi  
+       http://www.springframework.org/schema/osgi/spring-osgi.xsd
+       http://www.springframework.org/schema/aop 
+	   http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+       http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="delegatingrequestprocessor"
+		class="mypetstore.web.DelegatingRequestProcessor">
+	</bean>
+
+	<osgi:reference id="httpService"
+		interface="org.osgi.service.http.HttpService" />
+
+	<!-- 使用不同的DWR Servlet初始化，对应使用不同的配置方法 -->
+	<bean id="initWeb" class="mypetstore.web.InitWebDWRSpringServlet">
+		<property name="bundleContext">
+			<ref bean="bundleContext" />
+		</property>
+		<property name="httpService">
+			<ref bean="httpService" />
+		</property>
+		<property name="url" value="/petstore" />
+	</bean>
+</beans>

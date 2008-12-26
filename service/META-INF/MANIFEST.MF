@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vo Plug-in
+Bundle-SymbolicName: petstore_service
+Bundle-Version: 1.0.0
+Bundle-Vendor: SITECHASIA
+Export-Package: mypetstore.exception,
+ mypetstore.service,
+ mypetstore.utils,
+ mypetstore.web.vo
+Import-Package: com.sitechasia.webx.core.model

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.sitechasia.webx2.petstore.model">
+	<class name="Signon" table="SIGNON">
+		<id name="username" column="USERNAME">
+			<generator class="foreign">
+				<param name="property">account</param>
+			</generator>
+		</id>
+		<property name="password" column="PASSWORD" not-null="true" />
+		<one-to-one name="account"
+			class="com.sitechasia.webx2.petstore.model.Account" constrained="true" />
+	</class>
+</hibernate-mapping>
