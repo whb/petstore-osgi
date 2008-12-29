@@ -23,9 +23,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * 注册Web环境
+ * OSGi下替代web.xml注册Web环境；适用于DwrSpringServlet来初始化DWR。
+ * <ul>
+ * 注册Web环境步骤：
+ * <li>首先由Spring容器注入必须的属性；</li>
+ * <li>在Spring DM完成ApplicationContext创建后，回调setApplicationContext来执行初始化。</li>
+ * </ul>
  * 
- * @author Administrator
+ * @author wuhaibo
  * 
  */
 public class InitWebDWRSpringServlet implements ApplicationContextAware {
@@ -111,7 +116,7 @@ public class InitWebDWRSpringServlet implements ApplicationContextAware {
 	}
 
 	/**
-	 * 使用DwrSpringServlet初始化DWR，使用DWR配置文件dwr.xml
+	 * 使用DwrSpringServlet初始化DWR，使用DWR配置文件与Spring配置文件集成
 	 */
 	private void initDWRSpringServlet(HttpContext httpContext)
 			throws ServletException, NamespaceException {
@@ -120,8 +125,10 @@ public class InitWebDWRSpringServlet implements ApplicationContextAware {
 		dwrSpringServlet
 				.setApplicationContext(getDwrDependencyApplicationContext());
 
+		// 设置DwrSpringServlet的配置参数
 		Properties initParams = new Properties();
 		initParams.put("debug", "true");
+		initParams.put("activeReverseAjaxEnabled", "true");
 		Servlet dwrSpringActionServlet = new ContextPathServletAdaptor(
 				dwrSpringServlet, url);
 		httpService.registerServlet(url + "/dwr", dwrSpringActionServlet,

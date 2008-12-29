@@ -16,16 +16,20 @@
        http://www.directwebremoting.org/schema/spring-dwr
        http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
 
+	<!-- DWR与Spring 集成的配置文件 -->
 	<dwr:configuration>
-		<dwr:create javascript="dwrCatalogService" type="spring">
-			<dwr:param name="beanName" value="catalogService" />
+		<dwr:create javascript="CatalogFacade" type="spring">
+			<dwr:param name="beanName" value="catalogFacade" />
 		</dwr:create>
 		<dwr:convert type="bean" class="mypetstore.web.vo.CategoryVo" />
-		<dwr:convert type="bean" class="mypetstore.web.vo.AccountVo" />
-		<dwr:convert type="bean" class="mypetstore.web.vo.OrderVo" />
-		<dwr:convert type="bean" class="mypetstore.web.vo.ItemVo" />
-		<dwr:convert type="bean" class="mypetstore.web.vo.ProductVo" />
 	</dwr:configuration>
+
+	<bean id="catalogFacade"
+		class="mypetstore.web.dwr.facade.CatalogFacade">
+		<property name="catalogService">
+			<ref bean="catalogService" />
+		</property>
+	</bean>
 
 	<osgi:reference id="catalogService"
 		interface="mypetstore.service.CatalogService" />

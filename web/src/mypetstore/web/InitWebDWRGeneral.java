@@ -26,12 +26,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * 注册Web环境
+ * OSGi下替代web.xml注册Web环境；这是一个通用的方法来初始化DWR，使用时需要修改。
+ * <ul>
+ * 注册Web环境步骤：
+ * <li>首先由Spring容器注入必须的属性；</li>
+ * <li>在Spring DM完成ApplicationContext创建后，回调setApplicationContext来执行初始化。</li>
+ * </ul>
  * 
- * @author Administrator
+ * @author wuhaibo
  * 
  */
-public class InitWeb implements ApplicationContextAware {
+public class InitWebDWRGeneral implements ApplicationContextAware {
 	private static final String WEB_RESOURCES_PATH = "/web";
 	private static final String APPLICATION_CONTEXT_INTERFACE_NAME = "org.springframework.context.ApplicationContext";
 	private static final String FILTER_FORMATTER = "(org.springframework.context.service.name=%s)";

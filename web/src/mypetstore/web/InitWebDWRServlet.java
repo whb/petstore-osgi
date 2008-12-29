@@ -24,9 +24,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * 注册Web环境
+ * OSGi下替代web.xml注册Web环境；适用于DwrServlet来初始化DWR。
+ * <ul>
+ * 注册Web环境步骤：
+ * <li>首先由Spring容器注入必须的属性；</li>
+ * <li>在Spring DM完成ApplicationContext创建后，回调setApplicationContext来执行初始化。</li>
+ * </ul>
  * 
- * @author Administrator
+ * @author wuhaibo
  * 
  */
 public class InitWebDWRServlet implements ApplicationContextAware {
@@ -120,6 +125,7 @@ public class InitWebDWRServlet implements ApplicationContextAware {
 		SpringCreator
 				.setOverrideBeanFactory(getDwrDependencyApplicationContext());
 
+		// 设置DwrServlet的配置参数
 		Properties initParams = new Properties();
 		initParams.put("debug", "true");
 		initParams.put("activeReverseAjaxEnabled", "true");

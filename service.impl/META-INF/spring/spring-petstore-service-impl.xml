@@ -16,11 +16,6 @@
 	<!-- dozer -->
 	<bean id="dozerBeanMapper"
 		class="net.sf.dozer.util.mapping.DozerBeanMapper">
-		<property name="mappingFiles">
-			<list>
-				<value>dozerBeanMapping.xml</value>
-			</list>
-		</property>
 	</bean>
 	<!-- DO VO 转换器 -->
 	<bean id="dozerConvertUtil"

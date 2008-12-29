@@ -20,7 +20,7 @@
 	<osgi:reference id="httpService"
 		interface="org.osgi.service.http.HttpService" />
 
-	<!-- 使用不同的DWR Servlet初始化，对应使用不同的配置方法 -->
+	<!-- 使用DwrSpringServlet进行初始化，DWR配置文件与Spring配置文件集成 -->
 	<bean id="initWeb" class="mypetstore.web.InitWebDWRSpringServlet">
 		<property name="bundleContext">
 			<ref bean="bundleContext" />

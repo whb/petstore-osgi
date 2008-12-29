@@ -15,14 +15,20 @@
 	   http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.directwebremoting.org/schema/spring-dwr
        http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
-
+	
+	<!-- DWR与Spring 集成的配置文件 -->
 	<dwr:configuration>
-		<dwr:create javascript="dwrCustomerService" type="spring">
-			<dwr:param name="beanName" value="customerService" />
+		<dwr:create javascript="DynamciText" type="spring">
+			<dwr:param name="beanName" value="dynamciText" />
 		</dwr:create>
-		<dwr:create javascript="dwrOrderService" type="spring">
-			<dwr:param name="beanName" value="orderService" />
+
+		<dwr:create javascript="JavaChat" type="spring">
+			<dwr:param name="beanName" value="javaChat" />
 		</dwr:create>
+		<dwr:convert type="bean"
+			class="com.dwrdemo.reverseajax.chat.Message" />
 	</dwr:configuration>
 
+	<bean id="dynamciText" class="com.dwrdemo.simpletext.DynamciText" />
+	<bean id="javaChat" class="com.dwrdemo.reverseajax.chat.JavaChat" />
 </beans>

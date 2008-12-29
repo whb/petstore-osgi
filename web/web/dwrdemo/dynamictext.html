@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Dynamic Text</title>
-<script type='text/javascript' src='dwr/interface/Demo.js'></script>
-<script type='text/javascript' src='dwr/engine.js'></script>
-<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='../dwr/interface/DynamciText.js'></script>
+<script type='text/javascript' src='../dwr/engine.js'></script>
+<script type='text/javascript' src='../dwr/util.js'></script>
 
 
 <script type="text/javascript">
 function update() {
 	  var name = dwr.util.getValue("demoName");
-	  Demo.sayHello(name, function(data) {
+	  DynamciText.sayHello(name, function(data) {
 	    dwr.util.setValue("demoReply", data);
 	  });
 }

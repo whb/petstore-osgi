@@ -1,6 +1,6 @@
-package org.getahead.dwrdemo.simpletext;
+package com.dwrdemo.simpletext;
 
-public class Demo {
+public class DynamciText {
 	public String sayHello(String name) {
 		return "Hello, " + name;
 	}
