@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.pde.ui.EquinoxLauncher">
+<booleanAttribute key="append.args" value="true"/>
+<booleanAttribute key="automaticAdd" value="true"/>
+<booleanAttribute key="automaticValidate" value="false"/>
+<stringAttribute key="bootstrap" value=""/>
+<stringAttribute key="checked" value="[NONE]"/>
+<booleanAttribute key="clearConfig" value="false"/>
+<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/dwr"/>
+<booleanAttribute key="default_auto_start" value="true"/>
+<intAttribute key="default_start_level" value="4"/>
+<booleanAttribute key="includeOptional" value="true"/>
+<booleanAttribute key="org.eclipse.debug.core.appendEnvironmentVariables" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -console"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Declipse.ignoreApp=true -Dosgi.noShutdown=true -Dosgi.clean=true"/>
+<stringAttribute key="pde.version" value="3.3"/>
+<stringAttribute key="target_bundles" value="com.sitechasia.webx.orm.hibernate.hbmloader@default:default,dwr-3.0.0.116.rc1@default:default,javax.persistent@default:default,javax.servlet@default:default,javax.servlet.jsp@default:default,org.apache.commons.el@default:default,org.eclipse.equinox.common@default:default,org.eclipse.equinox.http.helper@default:default,org.eclipse.equinox.http.jetty@default:default,org.eclipse.equinox.http.registry@default:default,org.eclipse.equinox.http.servlet@default:default,org.eclipse.equinox.jsp.jasper@default:default,org.eclipse.equinox.jsp.jasper.registry@default:default,org.eclipse.equinox.registry@default:default,org.eclipse.osgi@:,org.eclipse.osgi.services@default:default,org.eclipse.osgi.util@default:default,org.mortbay.jetty@default:default,org.springframework.bundle.osgi.core@default:default,org.springframework.bundle.osgi.extender@default:default,org.springframework.bundle.osgi.io@default:default,org.springframework.bundle.spring.aop@default:default,org.springframework.bundle.spring.beans@default:default,org.springframework.bundle.spring.context@default:default,org.springframework.bundle.spring.context.support@default:default,org.springframework.bundle.spring.core@default:default,org.springframework.bundle.spring.jdbc@default:default,org.springframework.bundle.spring.orm@default:default,org.springframework.bundle.spring.tx@default:default,org.springframework.osgi.aopalliance.osgi@default:default,webx2.antlr@default:default,webx2.c3p0@default:default,webx2.dom4j@default:default,webx2.dozerutil@default:default,webx2.ectable@default:default,webx2.edu.emory.mathcs.backport@default:default,webx2.javassist@default:default,webx2.javax.servlet.jsp.jstl@default:default,webx2.javax.xml.stream@default:default,webx2.mysql.jdbc@default:default,webx2.net.sf.cglib@default:default,webx2.net.sf.ehcache@default:default,webx2.org.apache.commons.beanutils@default:default,webx2.org.apache.commons.codec-1.3@default:default,webx2.org.apache.commons.collections3.2.1@default:default,webx2.org.apache.commons.digester@default:default,webx2.org.apache.commons.lang@default:default,webx2.org.apache.commons.logging1.1.1@default:default,webx2.org.apache.commons.validator@default:default,webx2.org.apache.jasper@default:default,webx2.org.apache.log4j@default:default,webx2.org.apache.oro@default:default,webx2.org.apache.struts@default:default,webx2.org.apache.taglibs.standard@default:default,webx2.org.aspectj.runtime@default:default,webx2.org.aspectj.weaver@default:default,webx2.org.hibernate@default:default,webx2.org.objectweb.asm@default:default,webx2.org.objectweb.asm.tree.attrs@default:default,webx2.org.springframework.bundle.spring.web.update@default:default,webx2.slf4j.api@default:default,webx2.slf4j.log4j12@default:default,webx2_core@default:default,webx2_core_b@default:default,webx2_core_common@default:default"/>
+<booleanAttribute key="tracing" value="false"/>
+<booleanAttribute key="useDefaultConfigArea" value="true"/>
+<stringAttribute key="workspace_bundles" value="petstore_dao@default:default,petstore_datasource@default:default,petstore_service@default:default,petstore_service.impl@default:default,petstore_web@default:default"/>
+</launchConfiguration>
