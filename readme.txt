@@ -1,6 +1,9 @@
 本样例代码用于演示DWR与WebX2.0集成的配置过程。包括：
-2个与petstore无关的DWR简单应用；
-1个与petstore集成，演示petstore Catalog服务的DWR应用。
+2个与petstore无关的DWR简单应用:
+  petstore/dwrdemo/dynamictext.html
+  petstore/dwrdemo/javachat.html
+1个与petstore集成，演示petstore Catalog服务的DWR应用，没有集成界面，通过如下url访问:
+  petstore/dwr/test/CatalogFacade
 
 源代码组织:
 	datasource  :数据源配置bundle

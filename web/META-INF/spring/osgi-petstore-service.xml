@@ -18,9 +18,6 @@
 
 	<!-- DWR与Spring 集成的配置文件 -->
 	<dwr:configuration>
-		<dwr:create javascript="CatalogFacade" type="spring">
-			<dwr:param name="beanName" value="catalogFacade" />
-		</dwr:create>
 		<dwr:convert type="bean" class="mypetstore.web.vo.CategoryVo" />
 	</dwr:configuration>
 
@@ -29,6 +26,12 @@
 		<property name="catalogService">
 			<ref bean="catalogService" />
 		</property>
+		<dwr:remote javascript="CatalogFacade">
+			<dwr:include method="getCategoryList" />
+			<dwr:include method="getCategory" />
+			<dwr:include method="deleteCategoryById" />
+			<dwr:include method="saveCategory" />
+		</dwr:remote>
 	</bean>
 
 	<osgi:reference id="catalogService"
