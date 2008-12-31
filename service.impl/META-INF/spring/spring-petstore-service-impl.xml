@@ -19,9 +19,17 @@
 	</bean>
 	<!-- DO VO 转换器 -->
 	<bean id="dozerConvertUtil"
-		class="com.sitechasia.webx2.petstore.utils.DozerConvertUtilImle">
+		class="com.sitechasia.webx2.petstore.utils.OsgiDozerConvertUtilImpl">
+		<property name="bundleContext">
+			<ref bean="bundleContext" />
+		</property>
 		<property name="dozerBeanMapper">
 			<ref bean="dozerBeanMapper" />
+		</property>
+		<property name="mappingFiles">
+			<list>
+				<value>resource/dozerBeanMapping.xml</value>
+			</list>
 		</property>
 	</bean>
 
