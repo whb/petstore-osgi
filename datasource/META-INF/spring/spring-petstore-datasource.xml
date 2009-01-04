@@ -35,8 +35,8 @@
 			value="jdbc:mysql://127.0.0.1:3306/jpetstore" />
 		<property name="user" value="root" />
 		<property name="password" value="admin" />
-		<property name="minPoolSize" value="10" />
-		<property name="maxPoolSize" value="50" />
+		<property name="minPoolSize" value="2" />
+		<property name="maxPoolSize" value="10" />
 		<property name="maxIdleTime" value="1800" />
 		<property name="maxStatements" value="50" />
 	</bean>
