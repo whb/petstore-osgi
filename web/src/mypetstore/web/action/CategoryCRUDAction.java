@@ -19,7 +19,7 @@ public class CategoryCRUDAction extends BaseCRUDAction<CategoryVo, Integer> {
 	 */
 	public String save(@Read
 	CategoryVo categoryVo) throws MyPetStoreException{
-		catalogService.saveCategory(categoryVo);				
+		catalogService.saveCategory(categoryVo);	
 		return "list";
 	}	
 	/**
@@ -63,6 +63,8 @@ public class CategoryCRUDAction extends BaseCRUDAction<CategoryVo, Integer> {
 	public String  doEdit(@Read
 			CategoryVo categoryVo)throws MyPetStoreException {		
 		catalogService.doSave(categoryVo);
+		//saveDirectlyMessage("save ok !");
+		saveDirectlyError("error ok");
 		return "list";
 	}
 	

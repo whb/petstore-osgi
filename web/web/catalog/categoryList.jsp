@@ -1,10 +1,10 @@
 <%@ include file="../common/IncludeTop.jsp" %>
-
+<%@ include file="../common/messages.jsp" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <div id="Catalog">  
 	<table width="366" border="1">
 			  <tr>
-			    <th><div align="center">ProductId</div></th>
+			    <th><div align="center">ProductIdwhb</div></th>
 			    <th><div align="center">Name</div></th>
 			    <th><div align="center">DOperate</div></th>
 			    <th><div align="center">UOperate</div></th>
