@@ -1,5 +1,5 @@
 <%@ include file="../common/IncludeTop.jsp" %>
-<%@ include file="../common/messages.jsp" %>
+
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <div id="Catalog">  
 	<table width="366" border="1">

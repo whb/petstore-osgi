@@ -90,16 +90,4 @@
 
 <div id="Content">
 
-<html:errors/>
-
-<!-- Support for non-traditional but simple message -->
-<logic:present name="message">
-  <bean:write name="message"/>
-</logic:present>
-
-<!-- Support for non-traditional but simpler use of errors... -->
-<logic:present name="errors">
-  <logic:iterate id="error" name="errors">
-    <bean:write name="error"/>
-  </logic:iterate>
-</logic:present>
+<%@ include file="/common/messages.jsp" %>

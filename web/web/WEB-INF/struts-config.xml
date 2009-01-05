@@ -220,7 +220,7 @@
 
 	<controller processorClass="mypetstore.web.DelegatingRequestProcessor" />  
 
-	<message-resources parameter="properties.messages" />
+	<message-resources parameter="resource.messages" />
 
 	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
 		<set-property property="pathnames"
