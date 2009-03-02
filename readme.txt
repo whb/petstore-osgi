@@ -1,34 +1,34 @@
-±¾ÑùÀı´úÂëÓÃÓÚÑİÊ¾DWRÓëWebX2.0¼¯³ÉµÄÅäÖÃ¹ı³Ì¡£°üÀ¨£º
-2¸öÓëpetstoreÎŞ¹ØµÄDWR¼òµ¥Ó¦ÓÃ:
+æœ¬æ ·ä¾‹ä»£ç ç”¨äºæ¼”ç¤ºDWRä¸WebX2.0é›†æˆçš„é…ç½®è¿‡ç¨‹ã€‚åŒ…æ‹¬ï¼š
+2ä¸ªä¸petstoreæ— å…³çš„DWRç®€å•åº”ç”¨:
   petstore/dwrdemo/dynamictext.html
   petstore/dwrdemo/javachat.html
-1¸öÓëpetstore¼¯³É£¬ÑİÊ¾petstore Catalog·şÎñµÄDWRÓ¦ÓÃ£¬Ã»ÓĞ¼¯³É½çÃæ£¬Í¨¹ıÈçÏÂurl·ÃÎÊ:
+1ä¸ªä¸petstoreé›†æˆï¼Œæ¼”ç¤ºpetstore CatalogæœåŠ¡çš„DWRåº”ç”¨ï¼Œæ²¡æœ‰é›†æˆç•Œé¢ï¼Œé€šè¿‡å¦‚ä¸‹urlè®¿é—®:
   petstore/dwr/test/CatalogFacade
 
-Ô´´úÂë×éÖ¯:
-	datasource  :Êı¾İÔ´ÅäÖÃbundle
-	dao         :modelºÍdaoµÄbundle
-	service     :·şÎñ½Ó¿ÚºÍVOµÄbundle
-	service.impl:·şÎñÊµÏÖµÄbundle
-	web         :web²ãµÄbundle
-  lib         :×ÔÖÆµÄDWR3.0rc1µÄbundleºÍÒ»·İÔËĞĞÊ±µÄbundleÅäÖÃ²Î¿¼ÎÄ¼şdwr.launch
+æºä»£ç ç»„ç»‡:
+	datasource  :æ•°æ®æºé…ç½®bundle
+	dao         :modelå’Œdaoçš„bundle
+	service     :æœåŠ¡æ¥å£å’ŒVOçš„bundle
+	service.impl:æœåŠ¡å®ç°çš„bundle
+	web         :webå±‚çš„bundle
+  lib         :è‡ªåˆ¶çš„DWR3.0rc1çš„bundleå’Œä¸€ä»½è¿è¡Œæ—¶çš„bundleé…ç½®å‚è€ƒæ–‡ä»¶dwr.launch
 
-ÔËĞĞËµÃ÷:
-  1 È·ÈÏWebX2.0¿ª·¢»·¾³ÕıÈ·£»
-  2 ¸´ÖÆlib\webx2.dwr_3.0.0.116.rc1.jarµ½eclipseµÄpluginsÄ¿Â¼ÏÂ£»
-  3 ÔÚeclipseµ¼ÈëÒÑÓĞ¹¤³Ì£»
-  4 ĞŞ¸Äpetstore-datasource¹¤³ÌÖĞµÄspring-petstore-datasource.xmlÓë±¾µØÊı¾İ¿â»·¾³Ò»ÖÂ£»
-  5 ¸´ÖÆlib\dwr.launchµ½¹¤³Ì¶ÔÓ¦µÄworkspacesÏÂµÄ.metadata\.plugins\org.eclipse.debug.core\.launchesÄ¿Â¼ÏÂ£»»òÕß²Î¿¼petstore2.0µÄÔËĞĞÅäÖÃ£¬ÔÙÔö¼Ódwr-3.0.0.116.rc1µÄbundle£» 
-  6 ÔËĞĞeclipseÖĞRun->Open Run Dialog->dwrÅäÖÃ¡£
+è¿è¡Œè¯´æ˜:
+  1 ç¡®è®¤WebX2.0å¼€å‘ç¯å¢ƒæ­£ç¡®ï¼›
+  2 å¤åˆ¶lib\webx2.dwr_3.0.0.116.rc1.jaråˆ°eclipseçš„pluginsç›®å½•ä¸‹ï¼›
+  3 åœ¨eclipseå¯¼å…¥å·²æœ‰å·¥ç¨‹ï¼›
+  4 ä¿®æ”¹petstore-datasourceå·¥ç¨‹ä¸­çš„spring-petstore-datasource.xmlä¸æœ¬åœ°æ•°æ®åº“ç¯å¢ƒä¸€è‡´ï¼›
+  5 å¤åˆ¶lib\dwr.launchåˆ°å·¥ç¨‹å¯¹åº”çš„workspacesä¸‹çš„.metadata\.plugins\org.eclipse.debug.core\.launchesç›®å½•ä¸‹ï¼›æˆ–è€…å‚è€ƒpetstore2.0çš„è¿è¡Œé…ç½®ï¼Œå†å¢åŠ dwr-3.0.0.116.rc1çš„bundleï¼› 
+  6 è¿è¡Œeclipseä¸­Run->Open Run Dialog->dwré…ç½®ã€‚
 
-Ê¹ÓÃËµÃ÷:
-  petstore-web¹¤³ÌÖĞ:
-    web/dwrdemo/dynamictext.html: ¼òµ¥µÄ¶¯Ì¬ÎÄ±¾µÄÀı×Ó£»
-    web/dwrdemo/javachat.html: ¼ò»¯°æµÄÁÄÌìÊÒµÄÀı×Ó£¬Ê¹ÓÃReverse Ajax¼¼Êõ£»
-    META-INF/spring/dwr-demo.xml: ÉÏÊö2¸öÀı×ÓµÄDWRÓëSpring¼¯³ÉµÄÅäÖÃÎÄ¼ş£»
-    META-INF/spring/init-web.xml: Ê¹ÓÃDWRÊ±£¬³õÊ¼»¯webµÄSpringÅäÖÃÎÄ¼ş£»
-    META-INF/spring/osgi-petstore-service.xml: Óëpetstore¼¯³ÉµÄDWRÓëSpringÅäÖÃÎÄ¼ş£»
-    com.dwrdemo.reverseajax.chat.*: ÁÄÌìÊÒÀı×Ó¶ÔÓ¦µÄjavaÎÄ¼ş£»
-    com.dwrdemo.simpletext.*: ¶¯Ì¬ÎÄ±¾Àı×Ó¶ÔÓ¦µÄjavaÎÄ¼ş£»
-    mypetstore.web.InitWebDWRSpringServlet: DWR°æ±¾µÄ×¢²áWeb»·¾³µÄÀà;
-    mypetstore.web.dwr.facade.*: DWRÔÚpetstoreÖĞÊ¹ÓÃ£¬Ìæ´ústruts actionµÄÀà¡£
+ä½¿ç”¨è¯´æ˜:
+  petstore-webå·¥ç¨‹ä¸­:
+    web/dwrdemo/dynamictext.html: ç®€å•çš„åŠ¨æ€æ–‡æœ¬çš„ä¾‹å­ï¼›
+    web/dwrdemo/javachat.html: ç®€åŒ–ç‰ˆçš„èŠå¤©å®¤çš„ä¾‹å­ï¼Œä½¿ç”¨Reverse AjaxæŠ€æœ¯ï¼›
+    META-INF/spring/dwr-demo.xml: ä¸Šè¿°2ä¸ªä¾‹å­çš„DWRä¸Springé›†æˆçš„é…ç½®æ–‡ä»¶ï¼›
+    META-INF/spring/init-web.xml: ä½¿ç”¨DWRæ—¶ï¼Œåˆå§‹åŒ–webçš„Springé…ç½®æ–‡ä»¶ï¼›
+    META-INF/spring/osgi-petstore-service.xml: ä¸petstoreé›†æˆçš„DWRä¸Springé…ç½®æ–‡ä»¶ï¼›
+    com.dwrdemo.reverseajax.chat.*: èŠå¤©å®¤ä¾‹å­å¯¹åº”çš„javaæ–‡ä»¶ï¼›
+    com.dwrdemo.simpletext.*: åŠ¨æ€æ–‡æœ¬ä¾‹å­å¯¹åº”çš„javaæ–‡ä»¶ï¼›
+    mypetstore.web.InitWebDWRSpringServlet: DWRç‰ˆæœ¬çš„æ³¨å†ŒWebç¯å¢ƒçš„ç±»;
+    mypetstore.web.dwr.facade.*: DWRåœ¨petstoreä¸­ä½¿ç”¨ï¼Œæ›¿ä»£struts actionçš„ç±»ã€‚
