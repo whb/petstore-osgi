@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="dflm" default="package" basedir=".">
+	<property name="targetDir" value="target"/>
+	<property name="bundleVersion" value="1.0.0"/>
+	
+	<target name="clean" description="Clean target diretory.">
+		<delete dir="${targetDir}"/>
+	</target>
+	
+	<target name="mkdir" description="Create target diretory.">
+		<mkdir dir="${targetDir}"/>
+	</target>
+	
+	<target name="package" description="Package bundles." depends="mkdir">
+		<antcall target="package-one-bundle">
+			<param name="bundleId" value="petstore-dao"/>
+			<param name="bundleDir" value="dao"/>
+		</antcall>
+		<antcall target="package-one-bundle">
+			<param name="bundleId" value="petstore-datasource"/>
+			<param name="bundleDir" value="datasource"/>
+		</antcall>
+		<antcall target="package-one-bundle">
+			<param name="bundleId" value="petstore-service"/>
+			<param name="bundleDir" value="service"/>
+		</antcall>
+		
+		<antcall target="package-one-bundle">
+			<param name="bundleId" value="petstore-service.impl"/>
+			<param name="bundleDir" value="service.impl"/>
+		</antcall>
+		
+		<antcall target="package-one-bundle">
+			<param name="bundleId" value="petstore-web"/>
+			<param name="bundleDir" value="web"/>
+		</antcall>
+	</target>
+	
+	<target name="package-one-bundle" description="Package one bundle.">
+		<jar destfile="${targetDir}/${bundleId}.jar" manifest="${bundleDir}/META-INF/MANIFEST.MF">
+			<fileset dir="${bundleDir}/bin" />
+			<fileset dir="${bundleDir}" includes="META-INF/, web/, hib-res/"/>
+		</jar>
+	</target>
+</project>
